@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		div{
+			width: 300px;
+			height: 300px;
+			/*margin: 0px auto;*/
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<canvas id="myCanvasTag" width="300px" height="300px" style="background-color: #999;"></canvas>
+		</div>
+		<script src="js/jquery.js"></script>
+		<script>
+			var n=0;
+			var mycanvas = document.getElementById("myCanvasTag");
+			var mycontext = mycanvas.getContext('2d');
+//			$(document).click(function(e){
+//				var num1=e.clientX;
+//				var num2=e.clientY;
+//				if(n==0){
+//					mycontext.beginPath();
+//					mycontext.moveTo(num1,num2);
+//					n=1;
+//				}else{
+//					var num3=e.clientX;
+//					var num4=e.clientY; 
+//					console.log(num3);
+//					console.log(num4);
+//					mycontext.quadraticCurveTo(num1,num2,num3,num4);
+//					mycontext.stroke();
+//					n=0;
+//				}
+//			})
+
+
+//			$("#myCanvasTag").mousedown(function(e){
+//				num1=e.clientX;
+//				num2=e.clientY;
+//				mycontext.beginPath();
+//				mycontext.moveTo(num1,num2);
+//				console.log(num1)
+//				console.log(num2)
+//			}).mouseup(function(e){
+//				num3=e.clientX;
+//				num4=e.clientY; 
+//				mycontext.quadraticCurveTo(num1,num2,num3,num4);
+//				mycontext.stroke();
+//			})
+
+			$("#myCanvasTag").mousedown(function(e){
+				num1=e.clientX;
+				num2=e.clientY;
+				mycontext.beginPath();
+			}).mouseup(function(e){
+				num3=e.clientX;
+				num4=e.clientY; 
+				EllipseTwo1(mycontext, num1, num2, num3-num1, num4-num2)
+				mycontext.stroke();
+			})
+			function EllipseTwo1(context, x, y, a, b) {
+				    context.save();
+				    var r = (a > b) ? a : b;
+				    var ratioX = a / r;
+				    var ratioY = b / r;
+				    context.scale(ratioX, ratioY);
+				    context.beginPath();
+				    context.arc(x / ratioX, y / ratioY, r, 0, 2 * Math.PI, false);
+				    context.closePath();
+				    context.restore();
+				    context.fillStyle="red";
+				    context.fill();
+			}
+		</script>
+	</body>
+</html>
